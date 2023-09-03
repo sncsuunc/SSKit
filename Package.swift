@@ -50,7 +50,8 @@ let package = Package(
                 ]),
         .target(name: "SSKitRouters",
                 dependencies: [
-                    "SSKitCores"
+                    "SSKitCores",
+                    "SSKitViews"
                 ])
     ]
 )

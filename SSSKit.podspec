@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
-  spec.name         = "SSKit"
+  spec.name         = "SSSKit"
   spec.version      = "1.0.1"
-  spec.summary      = "SSKit - USEFULL IOS LIBRARY IN SWIFT."
+  spec.summary      = "SSSKit - USEFULL IOS LIBRARY IN SWIFT."
 
   spec.description  = <<-DESC
-  SSKit use Swfit to provide developers with usefull ios materials.
+  SSSKit use Swfit to provide developers with usefull ios materials.
                    DESC
 
   spec.homepage     = "https://github.com/sncsuunc/SSKit.git"
