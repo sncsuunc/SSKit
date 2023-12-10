@@ -1,6 +1,6 @@
 //
 //  Number+Extensions.swift
-//  
+//  SSKit
 //
 //  Created by SUU on 04/09/2023.
 //

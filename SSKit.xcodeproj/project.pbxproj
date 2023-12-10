@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0C8EA172B26407A004E724B /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8EA162B26407A004E724B /* UIBezierPath+Extensions.swift */; };
 		C0D0947F2AA4E33D001A7CB8 /* SSKitRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0947E2AA4E33D001A7CB8 /* SSKitRouter.swift */; };
 		C0D094812AA4E62D001A7CB8 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D094802AA4E62D001A7CB8 /* UINavigationController+Extensions.swift */; };
 		C0D094AA2AA50003001A7CB8 /* UICornerBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D094A92AA50003001A7CB8 /* UICornerBorderView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0C8EA162B26407A004E724B /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		C0D0947E2AA4E33D001A7CB8 /* SSKitRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKitRouter.swift; sourceTree = "<group>"; };
 		C0D094802AA4E62D001A7CB8 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		C0D094A92AA50003001A7CB8 /* UICornerBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICornerBorderView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		C0D094CD2AA502B7001A7CB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C0C8EA162B26407A004E724B /* UIBezierPath+Extensions.swift */,
 				C0D094DB2AA505F6001A7CB8 /* UICircularView.swift */,
 				C0D094CE2AA502D0001A7CB8 /* UIColumnFlowLayout.swift */,
 				C0D094A92AA50003001A7CB8 /* UICornerBorderView.swift */,
@@ -273,6 +276,7 @@
 				C0D094AE2AA5022B001A7CB8 /* UILoadingView.swift in Sources */,
 				C0D094D32AA50388001A7CB8 /* UILabel+Extensions.swift in Sources */,
 				C0E2C20C2A8F606A00AFFCB8 /* SSRouter.swift in Sources */,
+				C0C8EA172B26407A004E724B /* UIBezierPath+Extensions.swift in Sources */,
 				C0E2C20D2A8F606A00AFFCB8 /* DispatchQueue+Extensions.swift in Sources */,
 				C0D094E02AA50BDB001A7CB8 /* Data+Extensions.swift in Sources */,
 				C0E2C2082A8F606A00AFFCB8 /* SSViewController.swift in Sources */,

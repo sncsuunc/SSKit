@@ -1,6 +1,6 @@
 //
 //  SSViewController.swift
-//  
+//  SSKit
 //
 //  Created by SUU on 04/09/2023.
 //
@@ -20,7 +20,6 @@ open class SSViewController: UIViewController {
         initializeNotification()
         initializeViews()
         initializeData()
-        bindViewModel()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -45,20 +44,12 @@ open class SSViewController: UIViewController {
         
     }
     
-    @objc open func bindViewModel() {
-        
-    }
-    
     @objc open func reloadSetting() {
         
     }
     
     @objc open func releaseSetting() {
         
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
 }

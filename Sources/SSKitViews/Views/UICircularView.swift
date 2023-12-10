@@ -18,6 +18,17 @@ public class UICircularView: UIView {
     
 }
 
+public class UICircularLabel: UILabel {
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.frame.height/2
+    }
+    
+}
+
 public class UICircularButton: UIButton {
     
     override public func layoutSubviews() {
@@ -29,7 +40,7 @@ public class UICircularButton: UIButton {
     
 }
 
-public class UICircularImageView: UIButton {
+public class UICircularImageView: UIImageView {
     
     override public func layoutSubviews() {
         super.layoutSubviews()
