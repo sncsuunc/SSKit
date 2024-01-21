@@ -33,23 +33,23 @@ open class SSViewController: UIViewController {
     }
     
     @objc open func initializeNotification() {
-        
+        preconditionFailure("This method must be overridden")
     }
     
     @objc open func initializeViews() {
-        
+        preconditionFailure("This method must be overridden")
     }
     
     @objc open func initializeData() {
-        
+        preconditionFailure("This method must be overridden")
     }
     
     @objc open func reloadSetting() {
-        
+        preconditionFailure("This method must be overridden")
     }
     
     @objc open func releaseSetting() {
-        
+        preconditionFailure("This method must be overridden")
     }
     
 }

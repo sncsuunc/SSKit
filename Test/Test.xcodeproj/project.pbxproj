@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01EB1F62B584B020094CB22 /* ProfileUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01EB1F42B584B020094CB22 /* ProfileUpdateViewController.swift */; };
+		C01EB1F72B584B020094CB22 /* ProfileUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C01EB1F52B584B020094CB22 /* ProfileUpdateViewController.xib */; };
+		C01EB1F92B584B110094CB22 /* ProfileUpdateRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01EB1F82B584B110094CB22 /* ProfileUpdateRoute.swift */; };
 		C0D094882AA4EBD5001A7CB8 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D094872AA4EBD5001A7CB8 /* AppRouter.swift */; };
 		C0D0948C2AA4EC77001A7CB8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0948B2AA4EC77001A7CB8 /* MainViewController.swift */; };
 		C0D0948E2AA4EC82001A7CB8 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D0948D2AA4EC82001A7CB8 /* MainRoute.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C01EB1F42B584B020094CB22 /* ProfileUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewController.swift; sourceTree = "<group>"; };
+		C01EB1F52B584B020094CB22 /* ProfileUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileUpdateViewController.xib; sourceTree = "<group>"; };
+		C01EB1F82B584B110094CB22 /* ProfileUpdateRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateRoute.swift; sourceTree = "<group>"; };
 		C0D094872AA4EBD5001A7CB8 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C0D0948B2AA4EC77001A7CB8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C0D0948D2AA4EC82001A7CB8 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
@@ -64,6 +70,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C01EB1F32B584ADD0094CB22 /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				C01EB1F42B584B020094CB22 /* ProfileUpdateViewController.swift */,
+				C01EB1F52B584B020094CB22 /* ProfileUpdateViewController.xib */,
+				C01EB1F82B584B110094CB22 /* ProfileUpdateRoute.swift */,
+			);
+			path = Update;
+			sourceTree = "<group>";
+		};
 		C0D094832AA4EAF1001A7CB8 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +131,8 @@
 		C0D0948A2AA4EC63001A7CB8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				C0D0949B2AA4EFBE001A7CB8 /* ProfileDetail */,
+				C01EB1F32B584ADD0094CB22 /* Update */,
+				C0D0949B2AA4EFBE001A7CB8 /* Detail */,
 				C0D094932AA4EDC2001A7CB8 /* ProfileViewController.swift */,
 				C0D094942AA4EDC2001A7CB8 /* ProfileViewController.xib */,
 				C0D094972AA4EDD3001A7CB8 /* ProfileRoute.swift */,
@@ -123,14 +140,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		C0D0949B2AA4EFBE001A7CB8 /* ProfileDetail */ = {
+		C0D0949B2AA4EFBE001A7CB8 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				C0D0949C2AA4EFD1001A7CB8 /* ProfileDetailViewController.swift */,
 				C0D0949D2AA4EFD1001A7CB8 /* ProfileDetailViewController.xib */,
 				C0D094A02AA4EFED001A7CB8 /* ProfileDetailRoute.swift */,
 			);
-			path = ProfileDetail;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		C0D094A22AA4F57F001A7CB8 /* Setting */ = {
@@ -163,10 +180,10 @@
 		C0E2C1B82A8F5DDC00AFFCB8 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				C0D094832AA4EAF1001A7CB8 /* Apps */,
+				C0D094842AA4EAF8001A7CB8 /* Resources */,
 				C0D094862AA4EBCA001A7CB8 /* Routers */,
 				C0D094852AA4EAFD001A7CB8 /* Screens */,
-				C0D094842AA4EAF8001A7CB8 /* Resources */,
-				C0D094832AA4EAF1001A7CB8 /* Apps */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -244,6 +261,7 @@
 				C0E2C1C32A8F5DDD00AFFCB8 /* Assets.xcassets in Resources */,
 				C0D094962AA4EDC2001A7CB8 /* ProfileViewController.xib in Resources */,
 				C0D094922AA4EDB5001A7CB8 /* HomeViewController.xib in Resources */,
+				C01EB1F72B584B020094CB22 /* ProfileUpdateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +278,8 @@
 				C0D094A42AA4F596001A7CB8 /* SettingRoute.swift in Sources */,
 				C0D094A12AA4EFED001A7CB8 /* ProfileDetailRoute.swift in Sources */,
 				C0D0949E2AA4EFD1001A7CB8 /* ProfileDetailViewController.swift in Sources */,
+				C01EB1F92B584B110094CB22 /* ProfileUpdateRoute.swift in Sources */,
+				C01EB1F62B584B020094CB22 /* ProfileUpdateViewController.swift in Sources */,
 				C0D094882AA4EBD5001A7CB8 /* AppRouter.swift in Sources */,
 				C0D094982AA4EDD3001A7CB8 /* ProfileRoute.swift in Sources */,
 				C0D094912AA4EDB5001A7CB8 /* HomeViewController.swift in Sources */,

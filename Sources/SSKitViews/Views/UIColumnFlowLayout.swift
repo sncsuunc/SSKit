@@ -11,7 +11,7 @@ public class UIColumnFlowLayout: UICollectionViewFlowLayout {
 
     private let cellsPerRow: Int
 
-    init(cellsPerRow: Int, minimumInteritemSpacing: CGFloat = 0, minimumLineSpacing: CGFloat = 0, sectionInset: UIEdgeInsets = .zero) {
+    public init(cellsPerRow: Int, minimumInteritemSpacing: CGFloat = 0, minimumLineSpacing: CGFloat = 0, sectionInset: UIEdgeInsets = .zero) {
         self.cellsPerRow = cellsPerRow
         super.init()
         self.minimumInteritemSpacing = minimumInteritemSpacing
@@ -19,7 +19,7 @@ public class UIColumnFlowLayout: UICollectionViewFlowLayout {
         self.sectionInset = sectionInset
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

@@ -167,7 +167,11 @@ extension SSTabBarController: UINavigationControllerDelegate {
     }
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
+        if viewController == navigationController.viewControllers.first {
+            self.viewContainerTabBar.isHidden = false
+            self.viewContainerTabBarHeight?.constant = 56
+            self.view.layoutIfNeeded()
+        }
     }
     
 }

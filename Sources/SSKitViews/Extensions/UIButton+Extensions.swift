@@ -7,16 +7,25 @@
 
 import UIKit
 
-extension UIButton {
+public extension UIButton {
     
-    public func underline() {
-        guard let text = title(for: .normal) else { return }
-        let textRange = NSRange(location: 0, length: text.count)
-        let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(.underlineStyle,
-                                    value: NSUnderlineStyle.single.rawValue,
-                                    range: textRange)
-        self.setAttributedTitle(attributedText, for: .normal)
+    @IBInspectable
+    var isUnderline: Bool {
+        set {
+            if newValue {
+                guard let text = title(for: .normal) else { return }
+                let textRange = NSRange(location: 0, length: text.count)
+                let attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(.underlineStyle,
+                                            value: NSUnderlineStyle.single.rawValue,
+                                            range: textRange)
+                self.setAttributedTitle(attributedText, for: .normal)
+            }
+        }
+        @available(*, unavailable)
+        get {
+            fatalError("VARIABLE CAN NOT READ.")
+        }
     }
     
 }
@@ -25,12 +34,12 @@ extension UIButton {
 public extension UIButton {
     
     @IBInspectable
-    var localizeTitle: String {
-        set(value) {
-            self.setTitle(NSLocalizedString(value, comment: ""), for: .normal)
+    var localizedTitle: String {
+        set {
+            self.setTitle(NSLocalizedString(newValue, comment: ""), for: .normal)
         }
         get {
-            return ""
+            return NSLocalizedString(title(for: .normal) ?? "", comment: "")
         }
     }
     

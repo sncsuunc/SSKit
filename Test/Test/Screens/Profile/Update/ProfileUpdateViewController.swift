@@ -1,13 +1,13 @@
 //
-//  ProfileDetailViewController.swift
+//  ProfileUpdateViewController.swift
 //  Test
 //
-//  Created by SUU on 04/09/2023.
+//  Created by SUU on 18/01/2024.
 //
 
 import SSKit
 
-class ProfileDetailViewController: SSViewController {
+class ProfileUpdateViewController: SSViewController {
 
     override func initializeViews() {
         super.initializeViews()
@@ -16,7 +16,7 @@ class ProfileDetailViewController: SSViewController {
     }
     
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
-        AppRouter.shared.pop()
+        AppRouter.shared.popToRoot()
     }
-
+    
 }

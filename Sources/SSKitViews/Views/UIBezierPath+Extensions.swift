@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIBezierPath {
+public extension UIBezierPath {
     
     convenience init(shouldRoundRect rect: CGRect, topLeftRadius: CGSize = .zero, topRightRadius: CGSize = .zero, bottomLeftRadius: CGSize = .zero, bottomRightRadius: CGSize = .zero){
 
@@ -60,7 +60,7 @@ extension UIBezierPath {
     
 }
 
-extension UIBezierPath {
+public extension UIBezierPath {
 
     convenience init(shouldRoundRect rect: CGRect, topLeftRadius: CGFloat, topRightRadius: CGFloat, bottomLeftRadius: CGFloat, bottomRightRadius: CGFloat){
 
