@@ -26,14 +26,14 @@ public class UIGradientView: UIView {
     }
     
     @IBInspectable
-    public var topColor: UIColor = .red {
+    public var topColor: UIColor = .clear {
         didSet {
             setNeedsLayout()
         }
     }
     
     @IBInspectable
-    public var bottomColor: UIColor = .yellow {
+    public var bottomColor: UIColor = .clear {
         didSet {
             setNeedsLayout()
         }
@@ -61,8 +61,18 @@ public class UIGradientView: UIView {
     }
     
     @IBInspectable
-    public var shadowBlur: CGFloat = 3 {
+    public var shadowBlur: CGFloat = 0 {
         didSet {
+            setNeedsLayout()
+        }
+    }
+    
+    @IBInspectable
+    public var shadowOpacity: Float = 0 {
+        didSet {
+            if shadowOpacity > 1 || shadowOpacity < 0 {
+                return
+            }
             setNeedsLayout()
         }
     }
@@ -123,7 +133,7 @@ public class UIGradientView: UIView {
             self.layer.shadowColor = shadowColor.cgColor
             self.layer.shadowOffset = CGSize(width: shadowX, height: shadowY)
             self.layer.shadowRadius = shadowBlur
-            self.layer.shadowOpacity = 1
+            self.layer.shadowOpacity = shadowOpacity
         }
     }
     

@@ -19,14 +19,14 @@ public protocol SSRoute {
     
 }
 
-public enum SSRouterTransitionFrom {
+public enum SSRouterTransitionFrom: Equatable {
     case right
     case left
     case top
     case bottom
 }
 
-public enum SSRouterTransitionStyle {
+public enum SSRouterTransitionStyle: Equatable {
     case formSheet
     case pageSheet
     case fullScreen
@@ -36,16 +36,17 @@ public enum SSRouterTransitionStyle {
     case popover
 }
 
-public enum SSRouterTransition {
+public enum SSRouterTransition: Equatable {
     case present(_ from: SSRouterTransitionFrom = .bottom, _ style: SSRouterTransitionStyle = .fullScreen)
     case open(_ from: SSRouterTransitionFrom)
-    case close(_ to: SSRouterTransitionFrom)
     case push
-    case reset
     case root
+    case reset
 }
 
 public protocol SSRouter: AnyObject {
+    
+    var currentTransition: SSRouterTransition? { get set }
     
     var rootViewController: UINavigationController? { get set }
     
@@ -57,21 +58,16 @@ public protocol SSRouter: AnyObject {
     
     func navigate(to router: SSRouter, animated: Bool, completion: (() -> Void)?)
     
-    func pop(_ animated: Bool)
+    func exit(_ animated: Bool,_ completion: (() -> Void)?)
     
     func pop(to index: Int, animated: Bool)
-    
-    func popToRoot(_ animated: Bool)
-    
-    func dismiss(_ animated: Bool,_ completion: (() -> Void)?)
-    
-    func close(_ animated: Bool,_ completion: (() -> Void)?)
     
 }
 
 public extension SSRouter {
     
     func navigate(root navigation: UINavigationController? = nil, to route: SSRoute, with transition: SSRouterTransition, animated: Bool = true, completion: (() -> Void)? = nil) {
+        currentTransition = transition
         let viewController = route.screen
         switch transition {
         case let .present(from, style):
@@ -82,6 +78,7 @@ public extension SSRouter {
                 transition.type = CATransitionType.moveIn
                 transition.subtype = CATransitionSubtype.fromRight
                 transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.isRemovedOnCompletion = true
                 currentViewController?.view.window?.layer.add(transition, forKey: kCATransition)
             case .left:
                 let transition = CATransition()
@@ -89,20 +86,23 @@ public extension SSRouter {
                 transition.type = CATransitionType.moveIn
                 transition.subtype = CATransitionSubtype.fromLeft
                 transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.isRemovedOnCompletion = true
                 currentViewController?.view.window?.layer.add(transition, forKey: kCATransition)
             case .top:
                 let transition = CATransition()
                 transition.duration = 0.5
-                transition.type = CATransitionType.moveIn
-                transition.subtype = CATransitionSubtype.fromTop
+                transition.type = CATransitionType.push
+                transition.subtype = CATransitionSubtype.fromBottom
                 transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.isRemovedOnCompletion = true
                 currentViewController?.view.window?.layer.add(transition, forKey: kCATransition)
             case .bottom:
                 let transition = CATransition()
                 transition.duration = 0.5
                 transition.type = CATransitionType.moveIn
-                transition.subtype = CATransitionSubtype.fromBottom
+                transition.subtype = CATransitionSubtype.fromTop
                 transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.isRemovedOnCompletion = true
                 currentViewController?.view.window?.layer.add(transition, forKey: kCATransition)
             }
             switch style {
@@ -156,17 +156,7 @@ public extension SSRouter {
             case .bottom:
                 rootViewController?.open(viewController: viewController, from: .fromBottom)
             }
-        case let .close(to):
-            switch to {
-            case .right:
-                rootViewController?.close(to: .fromLeft)
-            case .left:
-                rootViewController?.close(to: .fromRight)
-            case .top:
-                rootViewController?.close(to: .fromBottom)
-            case .bottom:
-                rootViewController?.close(to: .fromTop)
-            }
+            currentViewController = viewController
         }
     }
     
@@ -180,11 +170,42 @@ public extension SSRouter {
         currentViewController = viewController
     }
     
-    func popToRoot(_ animated: Bool = true) {
-        rootViewController?.popToRootViewController(animated: animated)
+    func exit(_ animated: Bool = true,_ completion: (() -> Void)? = nil) {
+        switch self.currentTransition {
+        case .present:
+            dismiss(animated, completion)
+            break
+        case .open(let transition):
+            switch transition {
+            case .right:
+                rootViewController?.close(to: .fromLeft)
+            case .left:
+                rootViewController?.close(to: .fromRight)
+            case .top:
+                rootViewController?.close(to: .fromBottom)
+            case .bottom:
+                rootViewController?.close(to: .fromTop)
+            }
+            currentViewController = rootViewController?.topViewController
+            completion?()
+            break
+        case .push:
+            pop(animated)
+            completion?()
+            break
+        default:
+            break
+        }
     }
     
-    func pop(to index: Int, animated: Bool = true) {
+    func pop(to index: Int = 0, animated: Bool = true) {
+        if currentTransition != .push {
+            return
+        }
+        if index < 0 {
+            rootViewController?.popToRootViewController(animated: animated)
+            return
+        }
         guard
             let viewControllers = rootViewController?.viewControllers,
             viewControllers.count > index
@@ -194,7 +215,11 @@ public extension SSRouter {
         currentViewController = viewController
     }
     
-    func pop(_ animated: Bool = true) {
+}
+
+extension SSRouter {
+    
+    private func pop(_ animated: Bool = true) {
         guard
             let viewControllers = rootViewController?.viewControllers,
             !viewControllers.isEmpty
@@ -203,13 +228,13 @@ public extension SSRouter {
         currentViewController = rootViewController?.topViewController
     }
     
-    func dismiss(_ animated: Bool = true,_ completion: (() -> Void)? = nil) {
+    private func dismiss(_ animated: Bool = true,_ completion: (() -> Void)? = nil) {
         let presentingViewController = currentViewController?.presentingViewController
         currentViewController?.dismiss(animated: animated, completion: completion)
         currentViewController = presentingViewController
     }
     
-    func close(_ animated: Bool = true,_ completion: (() -> Void)? = nil) {
+    private func close(_ animated: Bool = true,_ completion: (() -> Void)? = nil) {
         rootViewController?.dismiss(animated: animated, completion: completion)
         currentViewController = rootViewController?.topViewController
     }

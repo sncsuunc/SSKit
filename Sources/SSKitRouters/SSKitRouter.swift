@@ -11,6 +11,7 @@ open class SSKitRouter: NSObject, SSRouter {
     
     public var rootViewController: UINavigationController?
     public var currentViewController: UIViewController?
+    public var currentTransition: SSRouterTransition?
     
     public required init(with route: SSRoute) {
         let viewController = route.screen

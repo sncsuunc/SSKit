@@ -101,7 +101,6 @@ open class SSTabBarItemView: UIView {
         self.titleView.leadingToSuperview()
         self.titleView.trailingToSuperview()
         self.titleView.bottomToSuperview(offset: 8)
-        
         self.addSubview(self.iconView)
         self.iconView.topToSuperview(offset: 8)
         self.iconView.bottomToTop(of: self.titleView)

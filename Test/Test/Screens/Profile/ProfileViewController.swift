@@ -8,11 +8,18 @@
 import SSKit
 
 class ProfileViewController: SSViewController {
+    
+    override func initializeNotification() {
+        
+    }
 
     override func initializeViews() {
-        super.initializeViews()
         view.backgroundColor = .yellow
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewOnTouch)))
+    }
+    
+    override func initializeData() {
+        
     }
     
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {

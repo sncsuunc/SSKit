@@ -22,16 +22,6 @@ open class SSViewController: UIViewController {
         initializeData()
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        reloadSetting()
-    }
-    
-    open override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        releaseSetting()
-    }
-    
     @objc open func initializeNotification() {
         preconditionFailure("This method must be overridden")
     }
@@ -41,14 +31,6 @@ open class SSViewController: UIViewController {
     }
     
     @objc open func initializeData() {
-        preconditionFailure("This method must be overridden")
-    }
-    
-    @objc open func reloadSetting() {
-        preconditionFailure("This method must be overridden")
-    }
-    
-    @objc open func releaseSetting() {
         preconditionFailure("This method must be overridden")
     }
     

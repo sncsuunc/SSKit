@@ -9,14 +9,21 @@ import SSKit
 
 class SettingViewController: SSViewController {
 
+    override func initializeNotification() {
+        
+    }
+    
     override func initializeViews() {
-        super.initializeViews()
         view.backgroundColor = .yellow
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewOnTouch)))
     }
     
+    override func initializeData() {
+        
+    }
+    
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
-        AppRouter.shared.navigate(to: HomeRoute.root, with: .close(.right))
+        AppRouter.shared.exit()
     }
 
 }

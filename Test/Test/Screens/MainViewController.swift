@@ -9,8 +9,11 @@ import SSKit
 
 class MainViewController: SSTabBarController {
     
+    override func initializeNotification() {
+        
+    }
+    
     override func initializeViews() {
-        super.initializeViews()
         let home = HomeRoute.root.screen
         if #available(iOS 13.0, *) {
             home.tabBarItemView = SSTabBarItemView(title: "Home", icon: UIImage(systemName: "house"))
@@ -25,14 +28,6 @@ class MainViewController: SSTabBarController {
     }
     
     override func initializeData() {
-        
-    }
-    
-    override func reloadSetting() {
-        
-    }
-    
-    override func releaseSetting() {
         
     }
     

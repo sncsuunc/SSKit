@@ -80,12 +80,25 @@ open class SSTabBarController: SSViewController {
         }
     }
     
-    open override func initializeViews() {
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        initializeTabBarItems()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+extension SSTabBarController {
+    
+    private func initializeTabBarItems() {
         self.view.addSubview(viewContainerTabBarCustom)
         viewContainerTabBarCustom.leadingToSuperview(usingSafeArea: true)
         viewContainerTabBarCustom.trailingToSuperview(usingSafeArea: true)
         viewContainerTabBarCustom.bottomToSuperview(usingSafeArea: true)
-        viewContainerTabBarCustomHeight = viewContainerTabBarCustom.height(50)
+        viewContainerTabBarCustomHeight = viewContainerTabBarCustom.height(isHideViewCustom ? 0 : 50)
         self.view.addSubview(viewContainerTabBar)
         viewContainerTabBar.leadingToSuperview(usingSafeArea: true)
         viewContainerTabBar.trailingToSuperview(usingSafeArea: true)
@@ -144,10 +157,6 @@ open class SSTabBarController: SSViewController {
         self.currentNavigationController = selectedViewController
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
 }
 
 extension SSTabBarController: UINavigationControllerDelegate {
@@ -179,7 +188,7 @@ extension SSTabBarController: UINavigationControllerDelegate {
 extension SSTabBarController {
     
     @objc open func didSelected(index: Int, viewController: SSViewController) {
-        
+        preconditionFailure("This method must be overridden")
     }
     
 }

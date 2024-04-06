@@ -9,14 +9,21 @@ import SSKit
 
 class ProfileUpdateViewController: SSViewController {
 
+    override func initializeNotification() {
+        
+    }
+    
     override func initializeViews() {
-        super.initializeViews()
         view.backgroundColor = .green
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewOnTouch)))
     }
     
+    override func initializeData() {
+        
+    }
+    
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
-        AppRouter.shared.popToRoot()
+        AppRouter.shared.pop(to: -1)
     }
     
 }

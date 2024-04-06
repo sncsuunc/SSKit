@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0B656782BC15B28007F646E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		C0C8EA162B26407A004E724B /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		C0D0947E2AA4E33D001A7CB8 /* SSKitRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKitRouter.swift; sourceTree = "<group>"; };
 		C0D094802AA4E62D001A7CB8 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		C0E2C1CE2A8F5EF100AFFCB8 = {
 			isa = PBXGroup;
 			children = (
+				C0B656782BC15B28007F646E /* Package.swift */,
 				C0E2C1EE2A8F606A00AFFCB8 /* Sources */,
 				C0E2C1D92A8F5EF100AFFCB8 /* Products */,
 			);
