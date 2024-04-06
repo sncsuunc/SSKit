@@ -28,7 +28,7 @@ To integrate using Apple's Swift package manager, without Xcode integration, add
 For SSKit, use the following entry in your Podfile:
 
 ```rb
-pod 'SSSKit', '~> 15.0'
+pod 'SSSKit', '~> 1.0.2'
 ```
 
 Then run `pod install`.
