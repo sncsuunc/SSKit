@@ -54,6 +54,7 @@ open class SSTabBarItemView: UIView {
         let view = UIImageView()
         view.backgroundColor = .clear
         view.tintColor = .blue
+        view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
         return view
@@ -64,6 +65,7 @@ open class SSTabBarItemView: UIView {
         view.textAlignment = .center
         view.font = UIFont.systemFont(ofSize: 11)
         view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.required, for: .vertical)
         view.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -100,12 +102,11 @@ open class SSTabBarItemView: UIView {
         self.addSubview(self.titleView)
         self.titleView.leadingToSuperview()
         self.titleView.trailingToSuperview()
-        self.titleView.bottomToSuperview(offset: 8)
+        self.titleView.bottomToSuperview(offset: -4, priority: .defaultHigh)
         self.addSubview(self.iconView)
-        self.iconView.topToSuperview(offset: 8)
-        self.iconView.bottomToTop(of: self.titleView)
+        self.iconView.topToSuperview(offset: 8, priority: .defaultHigh)
+        self.iconView.bottomToTop(of: self.titleView, offset: -4, priority: .defaultHigh)
         self.iconView.centerXToSuperview()
-        self.iconView.height(to: self, multiplier: 0.6, relation: .equalOrLess)
         self.iconView.aspectRatio(1)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewOnTouch)))
     }

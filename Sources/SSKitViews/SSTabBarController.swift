@@ -14,8 +14,10 @@ open class SSTabBarController: SSViewController {
     
     private var currentViewController: SSViewController?
     private var currentNavigationController: UINavigationController?
-    private var viewContainerTabBarCustomHeight: NSLayoutConstraint?
+    private var viewContainerCustomHeight: NSLayoutConstraint?
     private var viewContainerTabBarHeight: NSLayoutConstraint?
+    private var viewContainerControllerPosition: NSLayoutConstraint?
+    private var viewContainerControllerBottom: NSLayoutConstraint?
     
     private var navigationControllers = [UINavigationController]()
     
@@ -33,16 +35,34 @@ open class SSTabBarController: SSViewController {
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.alignment = .fill
-        view.spacing = 8
+        view.spacing = 0
         return view
     }()
     
-    private var viewContainerTabBarCustom: UIView = {
+    private var viewContainerCustom: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    open var isUsingSafeArea: Bool = true
+    
+    open var isShowViewCustom: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.15) {
+                self.viewContainerCustomHeight?.constant = self.isShowViewCustom ? self.viewCustomHeight : 0
+                self.viewContainerCustom.isHidden = !self.isShowViewCustom
+                self.setNeedsFocusUpdate()
+            }
+        }
+    }
+    
+    open var viewCustomColor: UIColor = .clear
+    
+    open var viewCustomHeight: CGFloat = 50
+    
+    open var viewTabBarHeight: CGFloat = 56
     
     open var viewContollers = [SSViewController]() {
         didSet {
@@ -50,20 +70,10 @@ open class SSTabBarController: SSViewController {
         }
     }
     
-    open var isHideViewCustom: Bool = true {
-        didSet {
-            UIView.animate(withDuration: 0.15) {
-                self.viewContainerTabBarCustomHeight?.constant = self.isHideViewCustom ? 0 : 56
-                self.viewContainerTabBarCustom.isHidden = self.isHideViewCustom
-                self.setNeedsFocusUpdate()
-            }
-        }
-    }
-    
     open var selectedIndex: Int = -1 {
         didSet {
             if selectedIndex < 0 || selectedIndex > viewContollers.count {
-                fatalError("ViewController index out of bounds.")
+                fatalError("ViewControllers: Index out of bounds.")
             }
             if selectedIndex != oldValue {
                 if viewContollers.count > 0 && viewContollers.count > oldValue  {
@@ -94,21 +104,27 @@ open class SSTabBarController: SSViewController {
 extension SSTabBarController {
     
     private func initializeTabBarItems() {
-        self.view.addSubview(viewContainerTabBarCustom)
-        viewContainerTabBarCustom.leadingToSuperview(usingSafeArea: true)
-        viewContainerTabBarCustom.trailingToSuperview(usingSafeArea: true)
-        viewContainerTabBarCustom.bottomToSuperview(usingSafeArea: true)
-        viewContainerTabBarCustomHeight = viewContainerTabBarCustom.height(isHideViewCustom ? 0 : 50)
+        viewContainerCustom.backgroundColor = viewCustomColor
+        self.view.addSubview(viewContainerCustom)
+        viewContainerCustom.leadingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerCustom.trailingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerCustom.bottomToSuperview(usingSafeArea: true)
+        viewContainerCustom.isHidden = !isShowViewCustom
+        viewContainerCustomHeight = viewContainerCustom.height(isShowViewCustom ? viewCustomHeight : 0)
         self.view.addSubview(viewContainerTabBar)
-        viewContainerTabBar.leadingToSuperview(usingSafeArea: true)
-        viewContainerTabBar.trailingToSuperview(usingSafeArea: true)
-        viewContainerTabBar.bottomToTop(of: viewContainerTabBarCustom)
-        viewContainerTabBarHeight = viewContainerTabBar.height(56)
+        viewContainerTabBar.leadingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerTabBar.trailingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerTabBar.bottomToTop(of: viewContainerCustom)
+        viewContainerTabBarHeight = viewContainerTabBar.height(viewTabBarHeight)
         self.view.addSubview(viewContainerController)
-        viewContainerController.leadingToSuperview(usingSafeArea: true)
-        viewContainerController.trailingToSuperview(usingSafeArea: true)
-        viewContainerController.topToSuperview(usingSafeArea: true)
-        viewContainerController.bottomToTop(of: viewContainerTabBar)
+        viewContainerController.leadingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerController.trailingToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerController.topToSuperview(usingSafeArea: isUsingSafeArea)
+        viewContainerControllerPosition = viewContainerController.bottomToSuperview(priority: .defaultLow, usingSafeArea: isUsingSafeArea)
+        viewContainerControllerPosition?.isActive = false
+        viewContainerControllerBottom = viewContainerController.bottomToTop(of: viewContainerTabBar)
+        viewContainerControllerBottom?.isActive = true
+        
     }
  
     private func initializeViewControllers() {
@@ -166,17 +182,28 @@ extension SSTabBarController: UINavigationControllerDelegate {
             UIView.animate(withDuration: 0.15) {
                 self.viewContainerTabBar.isHidden = true
                 self.viewContainerTabBarHeight?.constant = 0
+                if self.isUsingSafeArea {
+                    self.viewContainerControllerPosition?.isActive = false
+                    self.viewContainerControllerBottom?.isActive = true
+                } else {
+                    self.viewContainerControllerPosition?.isActive = true
+                    self.viewContainerControllerBottom?.isActive = false
+                }
                 self.view.layoutIfNeeded()
             }
         } else {
-            self.viewContainerTabBar.isHidden = false
+            self.viewContainerControllerPosition?.isActive = false
+            self.viewContainerControllerBottom?.isActive = true
             self.viewContainerTabBarHeight?.constant = 56
+            self.viewContainerTabBar.isHidden = false
             self.view.layoutIfNeeded()
         }
     }
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if viewController == navigationController.viewControllers.first {
+            self.viewContainerControllerPosition?.isActive = false
+            self.viewContainerControllerBottom?.isActive = true
             self.viewContainerTabBar.isHidden = false
             self.viewContainerTabBarHeight?.constant = 56
             self.view.layoutIfNeeded()
@@ -189,6 +216,15 @@ extension SSTabBarController {
     
     @objc open func didSelected(index: Int, viewController: SSViewController) {
         preconditionFailure("This method must be overridden")
+    }
+    
+    @objc open func addViewCustom(_ view: UIView) {
+        self.viewContainerCustom.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.leadingToSuperview()
+        view.topToSuperview()
+        view.trailingToSuperview()
+        view.bottomToSuperview()
     }
     
 }

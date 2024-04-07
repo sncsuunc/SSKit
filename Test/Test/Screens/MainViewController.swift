@@ -23,8 +23,15 @@ class MainViewController: SSTabBarController {
             profile.tabBarItemView = SSTabBarItemView(title: "Profile", icon: UIImage(systemName: "person"))
         }
         viewContollers = [home, profile]
-        isHideViewCustom = true
+        isUsingSafeArea = false
         selectedIndex = 1
+        
+        let label = UILabel()
+        label.text = "VIEW CUSTOM"
+        label.textColor = .white
+        label.textAlignment = .center
+        addViewCustom(label)
+        isShowViewCustom = true
     }
     
     override func initializeData() {
