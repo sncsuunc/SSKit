@@ -23,7 +23,7 @@ class ProfileDetailViewController: SSViewController {
     }
     
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
-        AppRouter.shared.navigate(to: ProfileUpdateRoute.root, with: .push)
+        AppRouter.shared.exit()
     }
 
 }

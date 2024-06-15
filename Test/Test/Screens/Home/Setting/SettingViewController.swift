@@ -22,8 +22,12 @@ class SettingViewController: SSViewController {
         
     }
     
-    @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
+    @IBAction func buttonBackOnTouch(_ sender: UIButton) {
         AppRouter.shared.exit()
+    }
+    
+    @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
+        AppRouter.shared.navigate(to: ProfileDetailRoute.root, with: .present())
     }
 
 }

@@ -20,7 +20,7 @@ _Note: Instructions below are for using **SPM** without the Xcode UI. It's the e
 To integrate using Apple's Swift package manager, without Xcode integration, add the following as a dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/sncsuunc/SSKit.git", .upToNextMajor(from: "1.0.3"))
+.package(url: "https://github.com/sncsuunc/SSKit.git", .upToNextMajor(from: "1.0.4"))
 ```
 
 ### CocoaPods
@@ -28,7 +28,7 @@ To integrate using Apple's Swift package manager, without Xcode integration, add
 For SSKit, use the following entry in your Podfile:
 
 ```rb
-pod 'SSSKit', '~> 1.0.3'
+pod 'SSSKit', '~> 1.0.4'
 ```
 
 Then run `pod install`.

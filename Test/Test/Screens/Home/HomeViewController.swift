@@ -23,7 +23,7 @@ class HomeViewController: SSViewController {
     }
     
     @objc private func viewOnTouch(_ gesture: UITapGestureRecognizer) {
-        AppRouter.shared.navigate(to: SettingRoute.root, with: .present(.right))
+        AppRouter.shared.navigate(to: SettingRoute.root, with: .push)
     }
 
 }

@@ -46,6 +46,8 @@ public enum SSRouterTransition: Equatable {
 
 public protocol SSRouter: AnyObject {
     
+    var lastTransition: SSRouterTransition? { get set }
+    
     var currentTransition: SSRouterTransition? { get set }
     
     var rootViewController: UINavigationController? { get set }
@@ -67,6 +69,7 @@ public protocol SSRouter: AnyObject {
 public extension SSRouter {
     
     func navigate(root navigation: UINavigationController? = nil, to route: SSRoute, with transition: SSRouterTransition, animated: Bool = true, completion: (() -> Void)? = nil) {
+        lastTransition = currentTransition
         currentTransition = transition
         let viewController = route.screen
         switch transition {
@@ -196,6 +199,7 @@ public extension SSRouter {
         default:
             break
         }
+        currentTransition = lastTransition
     }
     
     func pop(to index: Int = 0, animated: Bool = true) {
